@@ -19,13 +19,17 @@ Then you will be able to access the EarnShark API through your code.
 After installation require the EarnShark npm through: `var earnsharknpm = require('earnshark-sdk');`
 
 ## Available Methods
-* getAccountInformation - Retrieve information on a particular account/subscription
-* getLicenseInformation - Retrieve information on a particular license
-* getAllLicensesOfProduct - Retrieve all the license data for a particular product
-* addNewSubscription - Add a new subscription to a product
-* getPaymentURL - Returns the payment portal URL for a subscription(linked to PayPal)
-* getAccountPayments - Returns all the payment transactions associated with the account
-* renewSubscription - Renew/Update a Subscription
+
+* Accounts:
+  * get_account_information - Retrieve information on a particular account/subscription
+  * get_account_payments - Returns all the payment transactions associated with the account
+* Licenses:
+  * get_license_information - Retrieve information on a particular license
+  * get_all_licenses_of_product - Retrieve all the license data for a particular product
+* Subscriptions: 
+  * new_subscription - Add a new subscription to a product
+  * renew_subscription - Renew/Update a Subscription
+  * get_payment_url - Returns the payment portal URL for a subscription(linked to PayPal)
 
 
 ## Usage Sample
@@ -92,7 +96,6 @@ var body = {
 
 earnsharknpm.addNewSubscription(product_id, key, body).then(function(data) {
     console.log(data)
-
 }, function(err) {
     console.log(err)
 })
@@ -100,7 +103,11 @@ earnsharknpm.addNewSubscription(product_id, key, body).then(function(data) {
 ```
 ### Generate Payment URL for an Account
 ```javascript
-earnsharknpm.getPaymentURL(product_id, key,  data.account_id, data.redirect)
+earnsharknpm.getPaymentURL(product_id, key, account_id, redirect).then(function(data) {
+   console.log(data)
+}, function(err) {
+   console.log(err)
+})
 ```
 ### To retrieve All Payment Transactions for an Account
 ```javascript
@@ -111,6 +118,13 @@ earnsharknpm.getAccountPayments(product_id, account_id,key).then(function(data) 
 });
 ```
 
-
+### Renew a subscription with a new license
+```javascript
+earnsharknpm.renewSubscription(product_id, key, subscription_id, new_license_id).then(function(data){
+    console.log(data)
+}, function(err) {
+    console.log(err)
+});
+```
 
  
